@@ -229,7 +229,8 @@ class EuropeanOption:
         T = date_string_to_datetime_obj(T)
 
         # compute and return time to maturity (in years)
-        return homogenize((T - t).days / 365.0, sort=False)
+        diff = T - t
+        return homogenize((diff.days + diff.seconds/3600.0/24.0) / 365.0, sort=False)
 
     def process_pricing_parameters(self, *args, **kwargs):
         """
